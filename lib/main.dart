@@ -47,6 +47,11 @@ class HomeScreen extends StatelessWidget {
       ),
       appBar: AppBar(
         title: const Text("Activity"),
+        actions: <Widget>[
+          // IconButton(
+              // onPressed: onPressed, icon: icon
+          // )
+        ],
       ),
     );
   }
