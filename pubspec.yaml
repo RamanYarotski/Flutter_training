@@ -54,8 +54,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/fonts/
-      #      - assets/icons/
-      #      - assets/images/
+    - assets/icons/
+    - assets/images/
 
 
       # An image asset can refer to one or more resolution-specific "variants", see
@@ -73,11 +73,11 @@ flutter:
   fonts:
     - family: Roboto
       fonts:
-        - asset: fonts/Roboto/Roboto-Black.ttf
+        - asset: assets/fonts/Roboto/Roboto-Black.ttf
           weight: 900
-        - asset: fonts/Roboto/Roboto-Bold.ttf
+        - asset: assets/fonts/Roboto/Roboto-Bold.ttf
           weight: 700
-        - asset: fonts/Roboto/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto/Roboto-Regular.ttf
           weight: 600
 
   #   - family: Trajan Pro
