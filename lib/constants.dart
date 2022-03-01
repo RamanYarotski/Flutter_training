@@ -18,3 +18,6 @@ const gray100 = Color(0xFCFCFCFC);
 //Orange palette
 const orange = Color(0xFFF27434);
 const orange2 = Color(0xFFBE5E34);
+
+//Dimensions
+const avatarSize = 50.00;

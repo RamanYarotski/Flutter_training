@@ -45,12 +45,55 @@ class HomeScreen extends StatelessWidget {
   Row _itemTextRow(
       int itemIndex, TextStyle itemTextStyle, TextStyle itemSecondTextStyle) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Text(users[itemIndex].number.toString(), style: itemTextStyle),
         Text(users[itemIndex].numberValue.toString(), style: itemTextStyle),
         Text(users[itemIndex].time.toString(), style: itemSecondTextStyle),
       ],
     );
+  }
+
+  Widget _circleAvatar(String imageRoute) {
+    return CircleAvatar(
+      backgroundImage: AssetImage(imageRoute),
+      radius: avatarSize,
+    );
+  }
+
+  Widget _circleAvatar2(String imageRoute) {
+    return Container(
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+      ),
+      margin: const EdgeInsets.all(4),
+      child: Image.asset(
+        imageRoute,
+        width: 80,
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+
+  Widget _circleAvatar3(String imageRoute) {
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage(imageRoute), fit: BoxFit.fill),
+        color: Colors.white,
+        shape: BoxShape.circle,
+      ),
+    );
+  }
+
+  Widget _circleAvatar4(String imageRoute) {
+    return CircleAvatar(
+        backgroundColor: Colors.transparent,
+        child: SizedBox(
+            width: 60,
+            height: 60,
+            child: ClipOval(
+              child: Image.asset(imageRoute),
+            )));
   }
 
   @override
@@ -64,39 +107,44 @@ class HomeScreen extends StatelessWidget {
             itemCount: users.length,
             itemBuilder: (BuildContext context, int index) {
               return Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 6),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Column(
+                        Expanded(
+                            child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Image.asset(
-                              users[index].avatarSource,
-                              width: 22,
-                              height: 22,
-                            ),
+                            _circleAvatar4(users[index].avatarSource),
                             Text(users[index].userName,
                                 style: const TextStyle(
                                     fontSize: 12, color: gray80)),
                           ],
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            _itemTextRow(index, itemTitleTextStyleBold,
-                                itemTitleTextStyle),
-                            _itemTextRow(index, itemTitleTextStyleBold,
-                                itemTitleTextStyle),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.more_vert))
-                          ],
-                        )
+                        )),
+                        // Expanded(child: 
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              _itemTextRow(index, itemTitleTextStyleBold,
+                                  itemTitleTextStyle),
+                              const Spacer(),
+                              _itemTextRow(index, itemSubTitleTextStyleBold,
+                                  itemSubTitleTextStyle),
+                            ],
+                          ),
+                        // ),
+                        // Expanded(child: 
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(Icons.more_vert))
+                            ],
+                          ),
+                        // )
                       ]));
             }),
       ),
