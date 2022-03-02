@@ -27,10 +27,13 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  cpf_cnpj_validator: ^2.0.0
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
   flutter_search_bar: ^2.1.0
+  google_fonts: ^2.3.1
+  syncfusion_localizations: ^19.4.54
   update: ^0.3.1
 
 dev_dependencies:
@@ -47,7 +50,6 @@ flutter:
     - assets/fonts/
     - assets/icons/
     - assets/images/
-  
     # An image asset can refer to one or more resolution-specific "variants", see
     # https://flutter.dev/assets-and-images/#resolution-aware.
     # For details regarding adding assets from package dependencies, see
