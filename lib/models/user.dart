@@ -9,9 +9,19 @@ class User {
 }
 
 final List<User> users = <User>[
-  User(
-      "assets/images/avatars/1.jpeg", "Henry Graves", 1, "Day", "12:25:14:355"),
-  User(
-      "assets/images/avatars/2.jpeg", "Johni Holmes", 1, "Day", "12:25:14:355"),
-  User("assets/images/avatars/3.jpeg", "Alma Simens", 1, "Day", "12:25:14:355")
+  User("assets/images/1.jpeg", "Henry Graves", 1, "Day", "12:25:14:355"),
+  User("assets/images/2.jpeg", "Johni Holmes", 1, "Day", "12:25:14:355"),
+  User("assets/images/3.jpeg", "Alma Simens", 1, "Day", "12:25:14:355"),
+  User("assets/images/1.jpeg", "Henry Graves", 1, "Day", "12:25:14:355"),
+  User("assets/images/2.jpeg", "Johni Holmes", 1, "Day", "12:25:14:355"),
+  User("assets/images/3.jpeg", "Alma Simens", 1, "Day", "12:25:14:355"),
+  User("assets/images/1.jpeg", "Henry Graves", 1, "Day", "12:25:14:355"),
+  User("assets/images/2.jpeg", "Johni Holmes", 1, "Day", "12:25:14:355"),
+  User("assets/images/3.jpeg", "Alma Simens", 1, "Day", "12:25:14:355"),
+  User("assets/images/1.jpeg", "Henry Graves", 1, "Day", "12:25:14:355"),
+  User("assets/images/2.jpeg", "Johni Holmes", 1, "Day", "12:25:14:355"),
+  User("assets/images/3.jpeg", "Alma Simens", 1, "Day", "12:25:14:355"),
+  User("assets/images/1.jpeg", "Henry Graves", 1, "Day", "12:25:14:355"),
+  User("assets/images/2.jpeg", "Johni Holmes", 1, "Day", "12:25:14:355"),
+  User("assets/images/3.jpeg", "Alma Simens", 1, "Day", "12:25:14:355"),
 ];

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:training_project/constants.dart';
-// import 'package:training_project/models/user.dart';
+import 'package:training_project/models/user.dart';
+import '../components/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -24,61 +25,122 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         appBar: buildAppBar(),
         body: Column(
           children: [
-            Container(
-              color: primaryColor,
-              child: TabBar(
-                  indicatorColor: gray100,
-                  controller: tabController,
-                  tabs: const [
-                    Tab(
-                      icon: Text(
-                        "FEED",
-                        style: TextStyle(
-                            fontWeight: FontWeight.normal, fontSize: 14),
-                      ),
-                    ),
-                    Tab(
-                      icon: Text(
-                        "NOTIFICATIONS",
-                        style: TextStyle(
-                            fontWeight: FontWeight.normal, fontSize: 14),
-                      ),
-                    ),
-                  ]),
+            MyTabBar(tabController: tabController),
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: TabBarView(controller: tabController, children: [
+                  Center(
+                    child: Column(children: [
+                      ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: users.length,
+                        itemBuilder: (context, int index) {
+                          final currentUser = users[index];
+                          return Card(
+                              margin: const EdgeInsets.only(top: 16),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        _circleAvatar(currentUser.avatarSource),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        Text(
+                                          currentUser.userName,
+                                          style: userNameTextStyle,
+                                        )
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      width: 16,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        _itemTextRow(
+                                            currentUser,
+                                            itemTitleTextStyleBold,
+                                            itemTitleTextStyle),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        _itemTextRow(
+                                            currentUser,
+                                            itemSubTitleTextStyleBold,
+                                            itemSubTitleTextStyle),
+                                      ],
+                                    ),
+                                    const Spacer(),
+                                    IconButton(
+                                        iconSize: 22,
+                                        alignment: Alignment.topRight,
+                                        padding: EdgeInsets.zero,
+                                        onPressed: () {},
+                                        icon: const Icon(
+                                          Icons.more_vert,
+                                          color: gray70,
+                                        )),
+                                  ],
+                                ),
+                              ));
+                        },
+                      )
+                    ]),
+                  ),
+                  const Center(
+                    child: Text("NOTIFICATIONS page"),
+                  )
+                ]),
+              ),
             )
           ],
         ));
   }
 }
 
-// TextStyle itemTitleTextStyle =
-//     const TextStyle(fontSize: 18, color: titleTextColor);
-// TextStyle itemTitleTextStyleBold = const TextStyle(
-//     fontSize: 18, color: titleTextColor, fontWeight: FontWeight.bold);
+TextStyle userNameTextStyle =
+    const TextStyle(fontSize: 8, color: subtitleTextColor);
 
-// TextStyle itemSubTitleTextStyle =
-//     const TextStyle(fontSize: 12, color: subtitleTextColor);
-// TextStyle itemSubTitleTextStyleBold =
-//     const TextStyle(fontSize: 12, color: subtitleTextColor);
+TextStyle itemTitleTextStyle = const TextStyle(fontSize: 18);
+TextStyle itemTitleTextStyleBold =
+    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
 
-// Row _itemTextRow(
-//     int itemIndex, TextStyle itemTextStyle, TextStyle itemSecondTextStyle) {
-//   return Row(
-//     // mainAxisSize: MainAxisSize.min,
-//     children: [
-//       Text(users[itemIndex].number.toString(), style: itemTextStyle),
-//       Text(users[itemIndex].numberValue.toString(), style: itemTextStyle),
-//       Text(users[itemIndex].time.toString(), style: itemSecondTextStyle),
-//     ],
-//   );
-// }
+TextStyle itemSubTitleTextStyle =
+    const TextStyle(fontSize: 12, color: subtitleTextColor);
+TextStyle itemSubTitleTextStyleBold = const TextStyle(
+    fontSize: 12, color: subtitleTextColor, fontWeight: FontWeight.bold);
 
-// Widget _circleAvatar(String imageRoute) {
-//   return CircleAvatar(
-//     backgroundImage: AssetImage(imageRoute),
-//     radius: avatarSize,
-//   );
-// }
+Row _itemTextRow(
+    User currentUser, TextStyle itemTextStyle, TextStyle itemSecondTextStyle) {
+  return Row(
+    children: [
+      Text(currentUser.number.toString(), style: itemTextStyle),
+      const SizedBox(
+        width: 4,
+      ),
+      Text(currentUser.numberValue.toString(), style: itemTextStyle),
+      const SizedBox(
+        width: 4,
+      ),
+      Text(currentUser.time.toString(), style: itemSecondTextStyle),
+    ],
+  );
+}
+
+Widget _circleAvatar(String imageRoute) {
+  return CircleAvatar(
+    backgroundImage: AssetImage(imageRoute),
+    radius: avatarSize,
+  );
+}
 
 // Widget _circleAvatar2(String imageRoute) {
 //   return Container(
@@ -136,13 +198,5 @@ AppBar buildAppBar() {
       IconButton(
           onPressed: () {}, icon: const Icon(Icons.more_vert, color: gray100))
     ],
-    // bottom: const TabBar(tabs: [
-    //   Tab(
-    //     text: "FEED",
-    //   ),
-    //   Tab(
-    //     text: "NOTIFICATIONS",
-    //   )
-    // ]),
   );
 }
