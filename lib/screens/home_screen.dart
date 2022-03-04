@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:training_project/constants.dart';
+import 'package:training_project/generated/l10n.dart';
 import 'package:training_project/widgets/export.dart';
 
 
@@ -29,10 +30,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             Expanded(
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: TabBarView(controller: tabController, children: const [
-                  FeedBar(),
+                child: TabBarView(controller: tabController, children: [
+                  const FeedBar(),
                   Center(
-                    child: Text( "NOTIFICATIONS page"),
+                    child: Text( S.current.notificationsPage),
                   )
                 ]),
               ),

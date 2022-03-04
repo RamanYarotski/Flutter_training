@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:training_project/constants.dart';
+import 'package:training_project/generated/l10n.dart';
 
 class MyTabBar extends StatelessWidget {
   const MyTabBar({
@@ -16,18 +17,16 @@ class MyTabBar extends StatelessWidget {
       child: TabBar(
           indicatorColor: gray100,
           controller: tabController,
-          tabs: const [
+          tabs: [
             Tab(
-              icon: Text(
-                "FEED",
-                style: TextStyle(
+              icon: Text( S.of(context).feed,
+                style: const TextStyle(
                     fontWeight: FontWeight.normal, fontSize: 14),
               ),
             ),
             Tab(
-              icon: Text(
-                "NOTIFICATIONS",
-                style: TextStyle(
+              icon: Text(S.of(context).notifications,
+                style: const TextStyle(
                     fontWeight: FontWeight.normal, fontSize: 14),
               ),
             ),
