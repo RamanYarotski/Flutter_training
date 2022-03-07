@@ -19,7 +19,11 @@ class FeedBar extends StatelessWidget {
         final currentUser = users[index];
         return GestureDetector(
           onTap: () => Navigator.push(
-              context, MaterialPageRoute(builder: (context) => FinanceScreen(userName: currentUser.userName,))),
+              context,
+              MaterialPageRoute(
+                  builder: (context) => FinanceScreen(
+                        user: currentUser,
+                      ))),
           child: UserCard(
             currentUser: currentUser,
           ),
