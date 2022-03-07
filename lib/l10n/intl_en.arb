@@ -2,4 +2,6 @@
     "feed":"FEED",
     "notifications":"NOTIFICATIONS",
     "notificationsPage":"NOTIFICATIONS PAGE",
+    "finance":"Finance",
+    "currentBalance":"Current Balance"
 }

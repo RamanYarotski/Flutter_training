@@ -80,11 +80,21 @@ class S {
     );
   }
 
-  /// `Flutter Demo`
-  String get flutterDemo {
+  /// `Finance`
+  String get finance {
     return Intl.message(
-      'Flutter Demo',
-      name: 'flutterDemo',
+      'Finance',
+      name: 'finance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current Balance`
+  String get currentBalance {
+    return Intl.message(
+      'Current Balance',
+      name: 'currentBalance',
       desc: '',
       args: [],
     );

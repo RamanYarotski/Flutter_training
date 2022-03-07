@@ -27,6 +27,7 @@ const red = Color(0xFFF03738);
 
 //Dimensions
 const avatarSize = 22.00;
+const backgroundAspectRatio = 0.40;
 
 //Text
 

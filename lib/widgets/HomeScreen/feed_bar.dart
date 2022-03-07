@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:training_project/models/user.dart';
-import 'package:training_project/screens/userScreen.dart';
+import 'package:training_project/screens/finance_screen.dart';
 import 'package:training_project/widgets/export.dart';
 
 class FeedBar extends StatelessWidget {
@@ -19,7 +19,7 @@ class FeedBar extends StatelessWidget {
         final currentUser = users[index];
         return GestureDetector(
           onTap: () => Navigator.push(
-              context, MaterialPageRoute(builder: (context) => UserScreen(userName: currentUser.userName,))),
+              context, MaterialPageRoute(builder: (context) => FinanceScreen(userName: currentUser.userName,))),
           child: UserCard(
             currentUser: currentUser,
           ),

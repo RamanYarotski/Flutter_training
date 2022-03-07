@@ -22,8 +22,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "currentBalance":
+            MessageLookupByLibrary.simpleMessage("Current Balance"),
         "feed": MessageLookupByLibrary.simpleMessage("FEED"),
-        "flutterDemo": MessageLookupByLibrary.simpleMessage("Flutter Demo"),
+        "finance": MessageLookupByLibrary.simpleMessage("Finance"),
         "notifications": MessageLookupByLibrary.simpleMessage("NOTIFICATIONS"),
         "notificationsPage":
             MessageLookupByLibrary.simpleMessage("NOTIFICATIONS PAGE")
