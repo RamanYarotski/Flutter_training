@@ -4,8 +4,12 @@ class User {
   int number;
   String numberValue;
   String time;
+  int balance;
+  int expenses;
+  int income;
+  int goal;
   User(this.avatarSource, this.userName, this.number, this.numberValue,
-      this.time);
+      this.time, this.balance, this.expenses, this.income,  this.goal);
 }
 
 final List<User> users = <User>[
