@@ -99,6 +99,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Expenses`
+  String get expenses {
+    return Intl.message(
+      'Expenses',
+      name: 'expenses',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Actual`
+  String get actual {
+    return Intl.message(
+      'Actual',
+      name: 'actual',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Planned`
+  String get planned {
+    return Intl.message(
+      'Planned',
+      name: 'planned',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Income`
+  String get income {
+    return Intl.message(
+      'Income',
+      name: 'income',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Monthly Income`
+  String get monthlyIncome {
+    return Intl.message(
+      'Monthly Income',
+      name: 'monthlyIncome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Goal`
+  String get goal {
+    return Intl.message(
+      'Goal',
+      name: 'goal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Amount`
+  String get totalAmount {
+    return Intl.message(
+      'Total Amount',
+      name: 'totalAmount',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

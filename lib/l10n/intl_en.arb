@@ -3,5 +3,13 @@
     "notifications":"NOTIFICATIONS",
     "notificationsPage":"NOTIFICATIONS PAGE",
     "finance":"Finance",
-    "currentBalance":"Current Balance"
+    "currentBalance":"Current Balance",
+    "expenses":"Expenses",
+    "actual":"Actual",
+    "planned":"Planned",
+    "income":"Income",
+    "monthlyIncome":"Monthly Income",
+    "goal":"Goal",
+    "save":"Save",
+    "totalAmount":"Total Amount"
 }

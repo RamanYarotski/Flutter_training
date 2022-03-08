@@ -26,8 +26,15 @@ const red = Color(0xFFF03738);
 
 //Dimensions
 const avatarSize = 22.00;
-const backgroundAspectRatio = 0.40;
+const headerHeightCoeff = 0.40;
 const half = 0.5;
+const titleSize = 36.0;
+const subtitleSize = 18.0;
+const titleHeightCoeff = 0.12;
+const appBarTitleHeightCoeff = 0.05;
+const bodyHeightCoeff = 0.6;
+const financeItemsCount = 3;
+
 
 
 //Text
