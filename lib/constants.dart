@@ -14,6 +14,7 @@ const contentColorDarkTheme = gray100;
 const black1 = Color(0xFF000000);
 const gray15 = Color(0xFF262626);
 const gray30 = Color(0xFF4D4D4D);
+const gray50 = Color.fromARGB(255, 158, 158, 158);
 const gray70 = Color(0xFFB2B2B2);
 const gray80 = Color(0xFFCCCCCC);
 const gray84 = Color(0xFFD7D7D7);
@@ -32,8 +33,10 @@ const titleSize = 36.0;
 const subtitleSize = 18.0;
 const titleHeightCoeff = 0.12;
 const appBarTitleHeightCoeff = 0.05;
-const bodyHeightCoeff = 0.6;
+const bodyHeightCoeff = 0.7;
 const financeItemsCount = 3;
+const financeItemMargin = 5.0;
+const financeItemPadding = 12.0;
 
 
 

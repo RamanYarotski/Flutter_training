@@ -39,7 +39,7 @@ Widget _circleAvatar(String imageRoute) {
 }
 
 class UserCard extends StatelessWidget {
-  const UserCard({Key? key, required this.currentUser})
+  const UserCard({Key key, this.currentUser})
       : super(key: key);
 
   final User currentUser;

@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:training_project/constants.dart';
-import 'package:training_project/generated/l10n.dart';
 import 'package:training_project/models/user.dart';
+import 'package:training_project/strings.dart';
+
+extension on int {
+  String toStringDollarPattern() {
+    return "\$${(this / 1000).toString().replaceAll(".", ",")}";
+  }
+}
+
+TextStyle financeItemSubtitleTextStyle =
+    const TextStyle(fontSize: 16, color: gray50, fontWeight: FontWeight.w500);
 
 class FinanceScreen extends StatelessWidget {
-  const FinanceScreen({Key? key, required this.user}) : super(key: key);
+  const FinanceScreen({Key key, this.user}) : super(key: key);
 
   final User user;
 
@@ -13,6 +22,7 @@ class FinanceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var headerHeight = size.height * headerHeightCoeff;
+    var bodyHeight = size.height * bodyHeightCoeff;
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
@@ -35,7 +45,7 @@ class FinanceScreen extends StatelessWidget {
                       SizedBox(
                         height: headerHeight * appBarTitleHeightCoeff,
                       ),
-                      Text(S.of(context).finance,
+                      Text(Strings.finance,
                           style: const TextStyle(
                               fontSize: subtitleSize,
                               color: gray100,
@@ -44,14 +54,13 @@ class FinanceScreen extends StatelessWidget {
                       SizedBox(
                         height: headerHeight * titleHeightCoeff,
                       ),
-                      Text(
-                          "\$${(user.balance / 1000).toString().replaceAll(".", ",")}",
+                      Text(user.balance.toStringDollarPattern(),
                           style: const TextStyle(
                               fontSize: titleSize,
                               color: gray100,
                               fontWeight: FontWeight.w500,
                               fontFamily: "DMSans")),
-                      Text(S.of(context).currentBalance,
+                      Text(Strings.currentBalance,
                           style: const TextStyle(
                               fontSize: subtitleSize,
                               color: gray100,
@@ -60,56 +69,91 @@ class FinanceScreen extends StatelessWidget {
                     ],
                   ),
                 )),
-            // SafeArea(
-            //   child: Padding(
-            //     padding: EdgeInsets.only(top: headerHeight*appBarTitleHeightCoeff),
-            //     child: Text(S.of(context).finance,
-            //         style: const TextStyle(
-            //             fontSize: subtitleSize,
-            //             color: gray100,
-            //             fontWeight: FontWeight.w300,
-            //             fontFamily: "DMSans")),
-            //   ),
-            // ),
-            // Positioned(
-            //   top: headerHeight * titleHeightCoeff,
-            //   child: Text(
-            //       "\$${(user.balance / 1000).toString().replaceAll(".", ",")}",
-            //       style: const TextStyle(
-            //           fontSize: titleSize,
-            //           color: gray100,
-            //           fontWeight: FontWeight.w500,
-            //           fontFamily: "DMSans")),
-            // ),
-            // Positioned(
-            //   top: headerHeight * titleHeightCoeff +
-            //       titleSize / 2 +
-            //       subtitleSize * 1.5,
-            //   child: Text(S.of(context).currentBalance,
-            //       style: const TextStyle(
-            //           fontSize: subtitleSize,
-            //           color: gray100,
-            //           fontWeight: FontWeight.w300,
-            //           fontFamily: "DMSans")),
-            // ),
+
             Column(
               children: [
                 SizedBox(
-                  height: headerHeight,
+                  height: size.height - bodyHeight,
                 ),
                 SizedBox(
                   width: size.width,
-                  height: size.height * bodyHeightCoeff,
+                  height: bodyHeight,
                   child: ListView.builder(
+                    padding: const EdgeInsets.all(0),
                     itemCount: 3,
-                    shrinkWrap: true,
                     itemBuilder: ((context, index) {
-                      return const Card(
-                        // color: gray70,
-                        elevation: 2,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(3))),
-                        child: Text("sadsaddfsdf"),
+                      return Card(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: financeItemMargin,
+                            horizontal: financeItemMargin * 2),
+                        elevation: 4,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(6))),
+                        child: Container(
+                          padding: const EdgeInsets.all(financeItemPadding),
+                          height: bodyHeight / financeItemsCount -
+                              financeItemMargin * 2,
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      Strings.expenses,
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    const Icon(
+                                      Icons.keyboard_arrow_right_rounded,
+                                      color: gray70,
+                                      size: 26,
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            user.expensesActual
+                                                .toStringDollarPattern(),
+                                            style: const TextStyle(
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                          Text(
+                                            Strings.actual,
+                                            style: financeItemSubtitleTextStyle,
+                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Text(
+                                            user.expensesPlanned
+                                                .toStringDollarPattern(),
+                                            style: const TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                                color: gray50),
+                                          ),
+                                          Text(Strings.planned,
+                                              style:
+                                                  financeItemSubtitleTextStyle),
+                                        ],
+                                      )
+                                    ]),
+                              ]),
+                        ),
                       );
                     }),
                   ),

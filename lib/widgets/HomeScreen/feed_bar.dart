@@ -5,7 +5,7 @@ import 'package:training_project/widgets/export.dart';
 
 class FeedBar extends StatelessWidget {
   const FeedBar({
-    Key? key,
+    Key key,
   }) : super(key: key);
 
   @override

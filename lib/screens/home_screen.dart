@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:training_project/constants.dart';
-import 'package:training_project/generated/l10n.dart';
+import 'package:training_project/strings.dart';
 import 'package:training_project/widgets/export.dart';
 
-
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  late TabController tabController;
+  TabController tabController;
 
   @override
   void initState() {
@@ -33,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 child: TabBarView(controller: tabController, children: [
                   const FeedBar(),
                   Center(
-                    child: Text( S.current.notificationsPage),
+                    child: Text(Strings.notificationsPage),
                   )
                 ]),
               ),
