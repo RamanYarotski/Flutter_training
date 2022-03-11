@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:training_project/constants.dart';
 import 'package:training_project/models/user.dart';
 import 'package:training_project/strings.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 extension on int {
   String toStringDollarPattern() {
@@ -11,7 +12,7 @@ extension on int {
 }
 
 TextStyle financeItemSubtitleTextStyle =
-    const TextStyle(fontSize: 16, color: gray50, fontWeight: FontWeight.w500);
+    const TextStyle(fontSize: 13, color: gray50, fontWeight: FontWeight.w600);
 
 class FinanceScreen extends StatelessWidget {
   const FinanceScreen({Key key, this.user}) : super(key: key);
@@ -90,7 +91,11 @@ class FinanceScreen extends StatelessWidget {
                         shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(6))),
                         child: Container(
-                          padding: const EdgeInsets.all(financeItemPadding),
+                          padding: const EdgeInsets.fromLTRB(
+                              financeItemPadding,
+                              financeItemPadding,
+                              financeItemPadding * half,
+                              financeItemPadding),
                           height: bodyHeight / financeItemsCount -
                               financeItemMargin * 2,
                           child: Column(
@@ -113,45 +118,105 @@ class FinanceScreen extends StatelessWidget {
                                     )
                                   ],
                                 ),
-                                Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            user.expensesActual
-                                                .toStringDollarPattern(),
-                                            style: const TextStyle(
-                                                fontSize: 22,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                          Text(
-                                            Strings.actual,
-                                            style: financeItemSubtitleTextStyle,
-                                          ),
-                                        ],
+                                Row(children: [
+                                  Expanded(
+                                    flex: 8,
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              user.expensesActual
+                                                  .toStringDollarPattern(),
+                                              style: const TextStyle(
+                                                  fontSize: 22,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            Text(
+                                              user.expensesPlanned
+                                                  .toStringDollarPattern(),
+                                              style: const TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: gray50),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 4,
+                                        ),
+                                        Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                Strings.actual,
+                                                style:
+                                                    financeItemSubtitleTextStyle,
+                                              ),
+                                              Text(Strings.planned,
+                                                  style:
+                                                      financeItemSubtitleTextStyle),
+                                            ])
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 20.0),
+                                    child: Container(
+                                      height: buttonsSize,
+                                      width: buttonsSize,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: lilac,
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.grey
+                                                    .withOpacity(0.5),
+                                                spreadRadius: 3,
+                                                blurRadius: 5,
+                                                offset: const Offset(0, 2)),
+                                          ]),
+                                      child: const Icon(
+                                        Icons.add,
+                                        color: gray100,
                                       ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: [
-                                          Text(
-                                            user.expensesPlanned
-                                                .toStringDollarPattern(),
-                                            style: const TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w600,
-                                                color: gray50),
-                                          ),
-                                          Text(Strings.planned,
-                                              style:
-                                                  financeItemSubtitleTextStyle),
-                                        ],
-                                      )
-                                    ]),
+                                    ),
+                                  ),
+                                ]),
+                                Row(
+                                  children: [
+                                    LinearPercentIndicator(
+                                      padding: const EdgeInsets.all(0),
+                                      lineHeight: indicatorHeight,
+                                      backgroundColor: gray84,
+                                      animation: true,
+                                      linearGradient: const LinearGradient(
+                                        colors: <Color>[lilac,blue]) ,
+                                      curve: Curves.linear,
+                                      animateFromLastPercent: true,
+                                      animationDuration: 2000,
+                                      center: Text(
+                                        "${(user.expensesActual / user.expensesPlanned * 100).round().toString()}%",
+                                        style: const TextStyle(
+                                            color: black1,
+                                            fontSize: indicatorHeight),
+                                      ),
+                                      width: MediaQuery.of(context).size.width -
+                                          financeItemPadding * 2 -
+                                          financeItemMargin * 2 -
+                                          5,
+                                      barRadius: const Radius.circular(
+                                          indicatorHeight * half),
+                                      percent: user.expensesActual /
+                                          user.expensesPlanned,
+                                    ),
+                                    // ),
+                                  ],
+                                )
                               ]),
                         ),
                       );
