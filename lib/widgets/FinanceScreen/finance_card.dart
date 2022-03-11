@@ -1,0 +1,167 @@
+import 'package:flutter/material.dart';
+import 'package:percent_indicator/percent_indicator.dart';
+import 'package:training_project/constants.dart';
+
+extension on int {
+  String toStringDollarPattern() {
+    if (this > 1000) {
+      return "\$${(this / 1000).toString().replaceAll(".", ",")}";
+    } else {
+      return "\$$this";
+    }
+  }
+}
+
+TextStyle financeItemSubtitleTextStyle =
+    const TextStyle(fontSize: 13, color: gray50, fontWeight: FontWeight.w600);
+
+class FinanceCard extends StatelessWidget {
+  const FinanceCard({
+    Key key,
+    @required this.bodyHeight,
+    @required this.cardName,
+    @required this.currentParameterValue,
+    @required this.plannedParameterValue,
+    @required this.currentParameterName,
+    @required this.plannedParameterName,
+  }) : super(key: key);
+
+  final double bodyHeight;
+  final String cardName;
+  final int currentParameterValue;
+  final int plannedParameterValue;
+  final String currentParameterName;
+  final String plannedParameterName;
+
+  @override
+  Widget build(BuildContext context) {
+    var proportionOfProgress = currentParameterValue / plannedParameterValue;
+    var progressPercent = (proportionOfProgress * 100).round();
+
+    return Card(
+      margin: const EdgeInsets.symmetric(
+          vertical: financeItemMargin, horizontal: financeItemMargin * 2),
+      elevation: 4,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(6))),
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(financeItemPadding,
+            financeItemPadding, financeItemPadding * half, financeItemPadding*1.5),
+        height: bodyHeight / financeItemsCount - financeItemMargin * 2,
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    cardName,
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                   IconButton(
+                    padding: EdgeInsets.zero,
+                    splashRadius: 20,
+                    iconSize: 26,
+                    onPressed: () {},
+                    icon: const  Icon(
+                      Icons.keyboard_arrow_right_rounded,
+                      // size: 26,
+                      color: gray70,
+                    ),
+                  ),
+                ],
+              ),
+              Row(children: [
+                Expanded(
+                  flex: 8,
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            currentParameterValue.toStringDollarPattern(),
+                            style: const TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.w600),
+                          ),
+                          Text(
+                            plannedParameterValue.toStringDollarPattern(),
+                            style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: gray50),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              currentParameterName,
+                              style: financeItemSubtitleTextStyle,
+                            ),
+                            Text(plannedParameterName,
+                                style: financeItemSubtitleTextStyle),
+                          ])
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Container(
+                    height: buttonsSize,
+                    width: buttonsSize,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: lilac,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 3,
+                              blurRadius: 5,
+                              offset: const Offset(0, 2)),
+                        ]),
+                    child: const Icon(
+                      Icons.add,
+                      color: gray100,
+                    ),
+                  ),
+                ),
+              ]),
+              Row(
+                children: [
+                  LinearPercentIndicator(
+                    padding: const EdgeInsets.all(0),
+                    lineHeight: indicatorHeight,
+                    backgroundColor: gray84,
+                    animation: true,
+                    linearGradient:
+                        const LinearGradient(colors: <Color>[lilac, blue]),
+                    curve: Curves.linear,
+                    animateFromLastPercent: true,
+                    animationDuration: 1500,
+                    center: Text(
+                      "${progressPercent.toString()}%",
+                      style: const TextStyle(
+                          color: black1, fontSize: indicatorHeight),
+                    ),
+                    width: MediaQuery.of(context).size.width -
+                        financeItemPadding * 2 -
+                        financeItemMargin * 2 -
+                        5,
+                    barRadius: const Radius.circular(indicatorHeight * half),
+                    percent: proportionOfProgress,
+                  ),
+                  // ),
+                ],
+              )
+            ]),
+      ),
+    );
+  }
+}

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 class Strings {
   static String feed = 'FEED';
@@ -13,5 +12,5 @@ class Strings {
   static String monthlyIncome = 'Monthly Income';
   static String goal = 'Goal';
   static String save = 'Save';
-  static String totalAmount = 'Total Amountstatic String';
+  static String totalAmount = 'Total Amount';
 }
