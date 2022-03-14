@@ -27,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           children: [
             MyTabBar(tabController: tabController),
             Expanded(
+              flex: 1,
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: TabBarView(controller: tabController, children: [

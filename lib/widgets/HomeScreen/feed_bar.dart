@@ -10,8 +10,7 @@ class FeedBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: ListView.builder(
+    return ListView.builder(
       physics: const ScrollPhysics(),
       shrinkWrap: true,
       itemCount: users.length,
@@ -29,6 +28,6 @@ class FeedBar extends StatelessWidget {
           ),
         );
       },
-    ));
+    );
   }
 }
