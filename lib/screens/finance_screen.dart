@@ -7,11 +7,9 @@ import 'package:training_project/widgets/export.dart';
 
 extension on int {
   String toStringDollarPattern() {
-    if (this > 1000) {
-      return "\$${(this / 1000).toString().replaceAll(".", ",")}";
-    } else {
-      return "\$$this";
-    }
+    return (this > 1000)
+        ? "\$${(this / 1000).toString().replaceAll(".", ",")}"
+        : "\$$this";
   }
 }
 
@@ -65,33 +63,32 @@ class Body extends StatelessWidget {
         SizedBox(
             width: size.width,
             height: bodyHeight,
-            child: ListView(
-                padding: const EdgeInsets.all(0),
-                children: <Widget>[
-                  FinanceCard(
-                      bodyHeight: bodyHeight,
-                      cardName: Strings.expenses,
-                      currentParameterValue: user.expensesActual,
-                      plannedParameterValue: user.expensesPlanned,
-                      currentParameterName: Strings.actual,
-                      plannedParameterName: Strings.planned),
-                  FinanceCard(
-                    bodyHeight: bodyHeight,
-                    cardName: Strings.income,
-                    currentParameterValue: user.incomeActual,
-                    plannedParameterValue: user.incomeMonthly,
-                    currentParameterName: Strings.actual,
-                    plannedParameterName: Strings.monthlyIncome,
-                  ),
-                  FinanceCard(
-                    bodyHeight: bodyHeight,
-                    cardName: Strings.goal,
-                    currentParameterValue: user.goalSave,
-                    plannedParameterValue: user.goalTotalAmount,
-                    currentParameterName: Strings.save,
-                    plannedParameterName: Strings.totalAmount,
-                  )
-                ])),
+            child:
+                ListView(padding: const EdgeInsets.all(0), children: <Widget>[
+              FinanceCard(
+                  bodyHeight: bodyHeight,
+                  cardName: Strings.expenses,
+                  currentParameterValue: user.expensesActual,
+                  plannedParameterValue: user.expensesPlanned,
+                  currentParameterName: Strings.actual,
+                  plannedParameterName: Strings.planned),
+              FinanceCard(
+                bodyHeight: bodyHeight,
+                cardName: Strings.income,
+                currentParameterValue: user.incomeActual,
+                plannedParameterValue: user.incomeMonthly,
+                currentParameterName: Strings.actual,
+                plannedParameterName: Strings.monthlyIncome,
+              ),
+              FinanceCard(
+                bodyHeight: bodyHeight,
+                cardName: Strings.goal,
+                currentParameterValue: user.goalSave,
+                plannedParameterValue: user.goalTotalAmount,
+                currentParameterName: Strings.save,
+                plannedParameterName: Strings.totalAmount,
+              )
+            ])),
       ],
     );
   }

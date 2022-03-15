@@ -4,11 +4,9 @@ import 'package:training_project/constants.dart';
 
 extension on int {
   String toStringDollarPattern() {
-    if (this > 1000) {
-      return "\$${(this / 1000).toString().replaceAll(".", ",")}";
-    } else {
-      return "\$$this";
-    }
+    return (this > 1000)
+        ? "\$${(this / 1000).toString().replaceAll(".", ",")}"
+        : "\$$this";
   }
 }
 
