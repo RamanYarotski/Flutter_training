@@ -29,6 +29,9 @@ const red = Color(0xFFF03738);
 const lilac = Color(0xFF9575c9);
 const blue = Color(0xFF6983ea);
 
+const notSelectedColor = gray100;
+const selectedColor = gray84;
+
 
 //Dimensions
 const avatarSize = 22.00;
