@@ -39,10 +39,17 @@ class FinanceCard extends StatefulWidget {
 class _FinanceCardState extends State<FinanceCard> {
   _FinanceCardState();
 
+  final SelectFinanceCardBlock _selectFinanceCardBlock =
+      SelectFinanceCardBlock();
+
+  @override
+  void dispose() {
+    _selectFinanceCardBlock.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    SelectFinanceCardBlock _selectFinanceCardBlock = SelectFinanceCardBlock();
-
     var proportionOfProgress =
         widget.currentParameterValue / widget.plannedParameterValue;
     var progressPercent = (proportionOfProgress * 100).round();
