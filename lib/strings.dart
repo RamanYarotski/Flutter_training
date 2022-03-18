@@ -13,4 +13,6 @@ class Strings {
   static String goal = 'Goal';
   static String save = 'Save';
   static String totalAmount = 'Total Amount';
+  static String load = "Load";
+  static String clear = "Clear";
 }

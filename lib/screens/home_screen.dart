@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:training_project/block/select_finance_card_block.dart';
 import 'package:training_project/constants.dart';
 import 'package:training_project/strings.dart';
 import 'package:training_project/widgets/export.dart';
@@ -23,9 +21,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    // SelectFinanceCardBloc _selectFinanceCardBloc =
-    //     BlocProvider.of<SelectFinanceCardBloc>(context);
-
     return Scaffold(
         appBar: buildAppBar(),
         body: Column(
