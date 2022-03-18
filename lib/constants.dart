@@ -45,7 +45,12 @@ const financeItemMargin = 5.0;
 const financeItemPadding = 18.0;
 const buttonsSize = 40.0;
 const indicatorHeight = 8.0;
-const randomMaxDigit = 99000;
+const randomMaxBalance = 99000;
+const randomStartExpences = 9000;
+const randomStartIncome = 20000;
+const randomStartSave = 10000;
+
+
 const usersUrl = 'https://jsonplaceholder.typicode.com/users';
 
 //Sercer responces

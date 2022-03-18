@@ -31,20 +31,21 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) {
     var rnd = Random();
+    var rndDigit = rnd.nextInt(1000);
 
     return User(
-      avatarSource: 'assets/images/1.jpeg","Henry Graves',
-      userName: json['userName'],
+      avatarSource: 'assets/images/1.jpeg',
+      userName: json['username'],
       number: json['id'],
       numberValue: '№ ID',
       time: json['name'],
-      balance: rnd.nextInt(randomMaxDigit),
-      expensesActual: rnd.nextInt(randomMaxDigit),
-      expensesPlanned: rnd.nextInt(randomMaxDigit),
-      incomeActual: rnd.nextInt(randomMaxDigit),
-      incomeMonthly: rnd.nextInt(randomMaxDigit),
-      goalSave: rnd.nextInt(randomMaxDigit),
-      goalTotalAmount: rnd.nextInt(randomMaxDigit),
+      balance: rnd.nextInt(randomMaxBalance),
+      expensesActual: randomStartExpences,
+      expensesPlanned: randomStartExpences + rndDigit  ,
+      incomeActual: randomStartIncome,
+      incomeMonthly: randomStartIncome + rndDigit,
+      goalSave: randomStartSave,
+      goalTotalAmount: randomStartSave + rndDigit,
     );
   }
 }
