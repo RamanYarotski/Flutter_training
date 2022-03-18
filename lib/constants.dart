@@ -21,7 +21,6 @@ const gray84 = Color(0xFFD7D7D7);
 const gray95 = Color.fromARGB(255, 243, 243, 243);
 const gray100 = Color(0xFCFCFCFC);
 
-
 //Colored palette
 const orange = Color(0xFFF27434);
 const orange2 = Color(0xFFBE5E34);
@@ -31,7 +30,6 @@ const blue = Color(0xFF6983ea);
 
 const notSelectedColor = gray100;
 const selectedColor = gray84;
-
 
 //Dimensions
 const avatarSize = 22.00;
@@ -45,10 +43,14 @@ const bodyHeightCoeff = 0.7;
 const financeItemsCount = 3;
 const financeItemMargin = 5.0;
 const financeItemPadding = 18.0;
-const buttonsSize =40.0;
-const indicatorHeight =8.0;
+const buttonsSize = 40.0;
+const indicatorHeight = 8.0;
+const randomMaxDigit = 99000;
+const usersUrl = ' https://jsonplaceholder.typicode.com/users';
 
+//Sercer responces
+const successCode = 200;
 
-
-//Text
+//Exceptions
+const loadUsersError = "load Users Error";
 
