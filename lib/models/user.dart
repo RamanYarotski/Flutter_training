@@ -31,7 +31,7 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) {
     var rnd = Random();
-    var rndDigit = rnd.nextInt(1000);
+    var rndDigit = rnd.nextInt(10000);
 
     return User(
       avatarSource: 'assets/images/1.jpeg',

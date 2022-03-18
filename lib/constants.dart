@@ -46,9 +46,9 @@ const financeItemPadding = 18.0;
 const buttonsSize = 40.0;
 const indicatorHeight = 8.0;
 const randomMaxBalance = 99000;
-const randomStartExpences = 9000;
-const randomStartIncome = 20000;
-const randomStartSave = 10000;
+const randomStartExpences = 5432;
+const randomStartIncome = 10987;
+const randomStartSave = 20321;
 
 
 const usersUrl = 'https://jsonplaceholder.typicode.com/users';

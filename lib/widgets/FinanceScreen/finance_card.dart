@@ -33,13 +33,6 @@ class FinanceCard extends StatelessWidget {
     @required this.plannedParameterName,
   }) : super(key: key);
 
-//   @override
-//   _FinanceCardState createState() => _FinanceCardState();
-// }
-
-// class _FinanceCardState extends State<FinanceCard> {
-//   _FinanceCardState();
-
   @override
   Widget build(BuildContext context) {
     SelectFinanceCardBlock _selectFinanceCardBlock =
