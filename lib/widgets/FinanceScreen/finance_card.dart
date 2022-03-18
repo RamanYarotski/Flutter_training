@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:training_project/block/select_finance_card_block.dart';
 import 'package:training_project/constants.dart';
@@ -14,7 +15,7 @@ extension on int {
 TextStyle financeItemSubtitleTextStyle =
     const TextStyle(fontSize: 13, color: gray50, fontWeight: FontWeight.w600);
 
-class FinanceCard extends StatefulWidget {
+class FinanceCard extends StatelessWidget {
   final double bodyHeight;
   final String cardName;
   final int currentParameterValue;
@@ -32,63 +33,59 @@ class FinanceCard extends StatefulWidget {
     @required this.plannedParameterName,
   }) : super(key: key);
 
-  @override
-  _FinanceCardState createState() => _FinanceCardState();
-}
+//   @override
+//   _FinanceCardState createState() => _FinanceCardState();
+// }
 
-class _FinanceCardState extends State<FinanceCard> {
-  _FinanceCardState();
+// class _FinanceCardState extends State<FinanceCard> {
+//   _FinanceCardState();
 
   @override
   Widget build(BuildContext context) {
-    SelectFinanceCardBlock _selectFinanceCardBlock = SelectFinanceCardBlock();
+    SelectFinanceCardBlock _selectFinanceCardBlock =
+        BlocProvider.of<SelectFinanceCardBlock>(context);
 
-    var proportionOfProgress =
-        widget.currentParameterValue / widget.plannedParameterValue;
+    var proportionOfProgress = currentParameterValue / plannedParameterValue;
     var progressPercent = (proportionOfProgress * 100).round();
 
-    return StreamBuilder(
-      stream: _selectFinanceCardBlock.selectStateStream,
-      initialData: notSelectedColor,
-      builder: (context, snapshot) {
-        return GestureDetector(
-          onTap: () {
-            _selectFinanceCardBlock.selectEventSink.add(
-                (snapshot.data == notSelectedColor)
-                    ? SelectedState.selected
-                    : SelectedState.notSelected);
-          },
-          child: Card(
-            color: snapshot.data,
-            margin: const EdgeInsets.symmetric(
-                vertical: financeItemMargin, horizontal: financeItemMargin * 2),
-            elevation: 4,
-            child: Container(
-              padding: const EdgeInsets.fromLTRB(
-                  financeItemPadding,
-                  financeItemPadding,
-                  financeItemPadding * half,
-                  financeItemPadding * 1.5),
-              height:
-                  widget.bodyHeight / financeItemsCount - financeItemMargin * 2,
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TitleRow(cardName: widget.cardName),
-                    ValueRow(
-                        currentParameterValue: widget.currentParameterValue,
-                        plannedParameterValue: widget.plannedParameterValue,
-                        currentParameterName: widget.currentParameterName,
-                        plannedParameterName: widget.plannedParameterName),
-                    ProgressRow(
-                        progressPercent: progressPercent,
-                        proportionOfProgress: proportionOfProgress)
-                  ]),
-            ),
-          ),
-        );
-      },
-    );
+    return BlocBuilder<SelectFinanceCardBlock, Color>(
+        builder: (context, currentColorState) => GestureDetector(
+              onTap: () {
+                _selectFinanceCardBlock.add(
+                    (currentColorState == notSelectedColor)
+                        ? SelectedEvent.selected
+                        : SelectedEvent.notSelected);
+              },
+              child: Card(
+                color: currentColorState,
+                margin: const EdgeInsets.symmetric(
+                    vertical: financeItemMargin,
+                    horizontal: financeItemMargin * 2),
+                elevation: 4,
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(
+                      financeItemPadding,
+                      financeItemPadding,
+                      financeItemPadding * half,
+                      financeItemPadding * 1.5),
+                  height:
+                      bodyHeight / financeItemsCount - financeItemMargin * 2,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TitleRow(cardName: cardName),
+                        ValueRow(
+                            currentParameterValue: currentParameterValue,
+                            plannedParameterValue: plannedParameterValue,
+                            currentParameterName: currentParameterName,
+                            plannedParameterName: plannedParameterName),
+                        ProgressRow(
+                            progressPercent: progressPercent,
+                            proportionOfProgress: proportionOfProgress)
+                      ]),
+                ),
+              ),
+            ));
   }
 }
 

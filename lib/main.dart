@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:training_project/block/select_finance_card_block.dart';
 import 'package:training_project/screens/home_screen.dart';
 import 'package:training_project/theme.dart';
 
@@ -18,7 +20,10 @@ class MyApp extends StatelessWidget {
       theme: lightThemeData(context),
       darkTheme: darkThemeData(context),
       themeMode: ThemeMode.system,
-      home: const HomeScreen(),
+      home:  BlocProvider(
+        create: (context) => SelectFinanceCardBlock(),
+        child: const HomeScreen(),
+      ),
     );
   }
 }

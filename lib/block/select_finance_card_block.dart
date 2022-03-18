@@ -1,32 +1,19 @@
-import 'dart:async';
 import "package:flutter/material.dart";
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:training_project/constants.dart';
 
-enum SelectedState { selected, notSelected }
+enum  SelectedEvent{selected, notSelected}
 
-class SelectFinanceCardBlock {
-  Color _selectColor = notSelectedColor;
+class SelectFinanceCardBlock extends Bloc <SelectedEvent, Color>{
+ Color _color = notSelectedColor;
 
-  final _selectEventController = StreamController<SelectedState>();
-  StreamSink<SelectedState> get selectEventSink => _selectEventController.sink;
+  @override
+  Color get initialState => _color ;
 
-  final _selectStateController = StreamController<Color>();
-  Stream<Color> get selectStateStream => _selectStateController.stream;
-
-  void _mapEventToState(SelectedState selectedState) {
-    (selectedState == SelectedState.selected)
-        ? _selectColor = selectedColor
-        : _selectColor = notSelectedColor;
-
-    _selectStateController.sink.add(_selectColor);
+  @override
+  Stream<Color> mapEventToState(SelectedEvent event) async* {
+    _color = (event == SelectedEvent.selected)? selectedColor : notSelectedColor;
+    yield _color;
   }
-
-  SelectFinanceCardBlock() {
-    _selectEventController.stream.listen(_mapEventToState);
-  }
-
-  void dispose() {
-    _selectEventController.close();
-    _selectStateController.close();
-  }
+  
 }
