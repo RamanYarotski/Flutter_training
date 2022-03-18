@@ -46,7 +46,7 @@ const financeItemPadding = 18.0;
 const buttonsSize = 40.0;
 const indicatorHeight = 8.0;
 const randomMaxDigit = 99000;
-const usersUrl = ' https://jsonplaceholder.typicode.com/users';
+const usersUrl = 'https://jsonplaceholder.typicode.com/users';
 
 //Sercer responces
 const successCode = 200;

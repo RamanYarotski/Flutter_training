@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: TabBarView(controller: tabController, children: [
-                  const FeedBar(),
+                  FeedBar(),
                   Center(
                     child: Text(Strings.notificationsPage),
                   )

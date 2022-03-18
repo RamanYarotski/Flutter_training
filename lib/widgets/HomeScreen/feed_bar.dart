@@ -1,22 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:training_project/models/user.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:training_project/block/user_bloc.dart';
+import 'package:training_project/block/user_events.dart';
+import 'package:training_project/block/user_state.dart';
+import 'package:training_project/constants.dart';
 import 'package:training_project/screens/finance_screen.dart';
+import 'package:training_project/services/users_repository.dart';
 import 'package:training_project/strings.dart';
 import 'package:training_project/widgets/export.dart';
 
 class FeedBar extends StatelessWidget {
-  const FeedBar({
+  FeedBar({
     Key key,
   }) : super(key: key);
+  final usersRepository = UsersRepository();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        SizedBox(height: 16),
-        UsersManagementButtons(),
-        UsersList(),
-      ],
+    return BlocProvider<UserBloc>(
+      create: (context) => UserBloc(usersRepository: usersRepository),
+      child: Column(
+        children: const [
+          SizedBox(height: 16),
+          UsersManagementButtons(),
+          UsersList(),
+        ],
+      ),
     );
   }
 }
@@ -28,27 +37,61 @@ class UsersList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        physics: const ScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: users.length,
-        itemBuilder: (context, int index) {
-          final currentUser = users[index];
-          return GestureDetector(
-            onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => FinanceScreen(
-                          user: currentUser,
-                        ))),
-            child: UserCard(
-              currentUser: currentUser,
-            ),
-          );
-        },
-      ),
-    );
+    return BlocBuilder<UserBloc, UserState>(builder: (context, state) {
+      if (state is UserEmptyState) {
+        return SizedBox(
+          height: MediaQuery.of(context).size.height / 3,
+          child: Stack(
+            alignment: AlignmentDirectional.bottomCenter,
+            children: const [
+              Text(
+                "Press load to loading users",
+                style: TextStyle(fontSize: 14),
+              ),
+            ],
+          ),
+        );
+      }
+
+      if (state is UserLoadingState) {
+        return const Center(
+          child: CircularProgressIndicator(color: primaryColor),
+        );
+      }
+
+      if (state is UserLoadedState) {
+        return Expanded(
+          child: ListView.builder(
+            physics: const ScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: state.loadedUser.length,
+            itemBuilder: (context, int index) {
+              final currentUser = state.loadedUser[index];
+              return GestureDetector(
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => FinanceScreen(
+                              user: currentUser,
+                            ))),
+                child: UserCard(
+                  currentUser: currentUser,
+                ),
+              );
+            },
+          ),
+        );
+      }
+      if (state is UserErrorState) {
+        return const Center(
+          child: Text("Error loading users"),
+        );
+      } else {
+        return const Center(
+          child: Text("Unknown state"),
+        );
+      }
+    });
   }
 }
 
@@ -59,17 +102,26 @@ class UsersManagementButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final UserBloc userBloc = BlocProvider.of<UserBloc>(context);
     return Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Expanded(
             flex: 5,
-            child: ElevatedButton(onPressed: () {}, child: Text(Strings.load))),
+            child: ElevatedButton(
+                onPressed: () {
+                  userBloc.add(UserLoadEvent());
+                },
+                child: Text(Strings.load))),
         const SizedBox(width: 8),
         Expanded(
             flex: 5,
-            child: ElevatedButton(onPressed: () {}, child: Text(Strings.clear)))
+            child: ElevatedButton(
+                onPressed: () {
+                  userBloc.add(UserClearEvent());
+                },
+                child: Text(Strings.clear)))
       ],
     );
   }
