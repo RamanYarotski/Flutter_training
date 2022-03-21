@@ -3,31 +3,31 @@ import 'dart:math';
 import 'package:training_project/constants.dart';
 
 class User {
-  String avatarSource;
-  String userName;
-  int number;
-  String numberValue;
-  String time;
-  int balance;
-  int expensesActual;
-  int expensesPlanned;
-  int incomeActual;
-  int incomeMonthly;
-  int goalSave;
-  int goalTotalAmount;
+  final String avatarSource;
+  final String userName;
+  final int number;
+  final String numberValue;
+  final String time;
+  final int balance;
+  final int expensesActual;
+  final int expensesPlanned;
+  final int incomeActual;
+  final int incomeMonthly;
+  final int goalSave;
+  final int goalTotalAmount;
   User(
-      {this.avatarSource,
-      this.userName,
-      this.number,
-      this.numberValue,
-      this.time,
-      this.balance,
-      this.expensesActual,
-      this.expensesPlanned,
-      this.incomeActual,
-      this.incomeMonthly,
-      this.goalSave,
-      this.goalTotalAmount});
+      {required this.avatarSource,
+      required this.userName,
+      required this.number,
+      required this.numberValue,
+      required this.time,
+      required this.balance,
+      required this.expensesActual,
+      required this.expensesPlanned,
+      required this.incomeActual,
+      required this.incomeMonthly,
+      required this.goalSave,
+      required this.goalTotalAmount});
 
   factory User.fromJson(Map<String, dynamic> json) {
     var rnd = Random();
@@ -41,7 +41,7 @@ class User {
       time: json['name'],
       balance: rnd.nextInt(randomMaxBalance),
       expensesActual: randomStartExpences,
-      expensesPlanned: randomStartExpences + rndDigit  ,
+      expensesPlanned: randomStartExpences + rndDigit,
       incomeActual: randomStartIncome,
       incomeMonthly: randomStartIncome + rndDigit,
       goalSave: randomStartSave,

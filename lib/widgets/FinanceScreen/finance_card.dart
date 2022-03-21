@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:training_project/block/select_finance_card_block.dart';
+import 'package:training_project/block/selectCard/select_card_state.dart';
+import 'package:training_project/block/selectCard/select_card_bloc.dart';
+import 'package:training_project/block/selectCard/select_event.dart';
 import 'package:training_project/constants.dart';
 
 extension on int {
@@ -24,33 +26,35 @@ class FinanceCard extends StatelessWidget {
   final String plannedParameterName;
 
   const FinanceCard({
-    Key key,
-    @required this.bodyHeight,
-    @required this.cardName,
-    @required this.currentParameterValue,
-    @required this.plannedParameterValue,
-    @required this.currentParameterName,
-    @required this.plannedParameterName,
+    Key? key,
+    required this.bodyHeight,
+    required this.cardName,
+    required this.currentParameterValue,
+    required this.plannedParameterValue,
+    required this.currentParameterName,
+    required this.plannedParameterName,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    SelectFinanceCardBlock _selectFinanceCardBlock =
-        BlocProvider.of<SelectFinanceCardBlock>(context);
+    SelectCardBloc _selectCardBlock = context.read<SelectCardBloc>();
 
     var proportionOfProgress = currentParameterValue / plannedParameterValue;
     var progressPercent = (proportionOfProgress * 100).round();
 
-    return BlocBuilder<SelectFinanceCardBlock, Color>(
+    return BlocBuilder<SelectCardBloc, SelectCardState>(
         builder: (context, currentColorState) => GestureDetector(
               onTap: () {
-                _selectFinanceCardBlock.add(
-                    (currentColorState == notSelectedColor)
-                        ? SelectedEvent.selected
-                        : SelectedEvent.notSelected);
+                SelectEvent currentEvent;
+
+                (currentColorState is NotSelectedCardState)
+                    ? currentEvent = SelectedEvent()
+                    : currentEvent = NotSelectedEvent();
+
+                _selectCardBlock.add(currentEvent);
               },
               child: Card(
-                color: currentColorState,
+                color: currentColorState.stateColor,
                 margin: const EdgeInsets.symmetric(
                     vertical: financeItemMargin,
                     horizontal: financeItemMargin * 2),
@@ -84,9 +88,9 @@ class FinanceCard extends StatelessWidget {
 
 class ProgressRow extends StatelessWidget {
   const ProgressRow({
-    Key key,
-    @required this.progressPercent,
-    @required this.proportionOfProgress,
+    Key? key,
+    required this.progressPercent,
+    required this.proportionOfProgress,
   }) : super(key: key);
 
   final int progressPercent;
@@ -124,11 +128,11 @@ class ProgressRow extends StatelessWidget {
 
 class ValueRow extends StatelessWidget {
   const ValueRow({
-    Key key,
-    @required this.currentParameterValue,
-    @required this.plannedParameterValue,
-    @required this.currentParameterName,
-    @required this.plannedParameterName,
+    Key? key,
+    required this.currentParameterValue,
+    required this.plannedParameterValue,
+    required this.currentParameterName,
+    required this.plannedParameterName,
   }) : super(key: key);
 
   final int currentParameterValue;
@@ -197,8 +201,8 @@ class ValueRow extends StatelessWidget {
 
 class TitleRow extends StatelessWidget {
   const TitleRow({
-    Key key,
-    @required this.cardName,
+    Key? key,
+    required this.cardName,
   }) : super(key: key);
 
   final String cardName;

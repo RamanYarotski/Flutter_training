@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:training_project/block/user_bloc.dart';
-import 'package:training_project/block/user_events.dart';
-import 'package:training_project/block/user_state.dart';
+import 'package:training_project/block/users/user_bloc.dart';
+import 'package:training_project/block/users/user_events.dart';
+import 'package:training_project/block/users/user_state.dart';
 import 'package:training_project/constants.dart';
 import 'package:training_project/screens/finance_screen.dart';
 import 'package:training_project/services/users_repository.dart';
@@ -11,7 +11,7 @@ import 'package:training_project/widgets/export.dart';
 
 class FeedBar extends StatelessWidget {
   FeedBar({
-    Key key,
+    Key? key,
   }) : super(key: key);
   final usersRepository = UsersRepository();
 
@@ -32,7 +32,7 @@ class FeedBar extends StatelessWidget {
 
 class UsersList extends StatelessWidget {
   const UsersList({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -97,12 +97,12 @@ class UsersList extends StatelessWidget {
 
 class UsersManagementButtons extends StatelessWidget {
   const UsersManagementButtons({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final UserBloc userBloc = BlocProvider.of<UserBloc>(context);
+    final UserBloc userBloc = context.read<UserBloc>();
     return Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,

@@ -14,7 +14,7 @@ extension on int {
 }
 
 class FinanceScreen extends StatelessWidget {
-  const FinanceScreen({Key key, this.user}) : super(key: key);
+  const FinanceScreen({Key? key, required this.user}) : super(key: key);
 
   final User user;
 
@@ -43,10 +43,10 @@ class FinanceScreen extends StatelessWidget {
 
 class Body extends StatelessWidget {
   const Body({
-    Key key,
-    @required this.size,
-    @required this.bodyHeight,
-    @required this.user,
+    Key? key,
+    required this.size,
+    required this.bodyHeight,
+    required this.user,
   }) : super(key: key);
 
   final Size size;
@@ -96,9 +96,9 @@ class Body extends StatelessWidget {
 
 class Header extends StatelessWidget {
   const Header({
-    Key key,
-    @required this.headerHeight,
-    @required this.user,
+    Key? key,
+    required this.headerHeight,
+    required this.user,
   }) : super(key: key);
 
   final double headerHeight;

@@ -4,8 +4,8 @@ import 'package:training_project/strings.dart';
 
 class MyTabBar extends StatelessWidget {
   const MyTabBar({
-    Key key,
-    this.tabController,
+    Key? key,
+    required this.tabController,
   }) : super(key: key);
 
   final TabController tabController;

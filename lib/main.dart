@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:training_project/block/select_finance_card_block.dart';
+import 'package:training_project/block/selectCard/select_card_bloc.dart';
 import 'package:training_project/screens/home_screen.dart';
 import 'package:training_project/theme.dart';
 
@@ -9,13 +9,13 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SelectFinanceCardBlock(),
+      create: (context) => SelectCardBloc(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Flutter Demo",
