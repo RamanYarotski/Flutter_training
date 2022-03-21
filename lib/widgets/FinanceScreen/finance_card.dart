@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:training_project/block/select_finance_card_block.dart';
 import 'package:training_project/constants.dart';
+import 'package:training_project/cubit/select_card_cubit.dart';
+import 'package:training_project/cubit/select_card_state.dart';
 
 extension on int {
   String toStringDollarPattern() {
@@ -35,22 +36,18 @@ class FinanceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SelectFinanceCardBlock _selectFinanceCardBlock =
-        BlocProvider.of<SelectFinanceCardBlock>(context);
+    SelectCardCubit selectCardCubit = context.watch<SelectCardCubit>();
 
     var proportionOfProgress = currentParameterValue / plannedParameterValue;
     var progressPercent = (proportionOfProgress * 100).round();
 
-    return BlocBuilder<SelectFinanceCardBlock, Color>(
+    return BlocBuilder<SelectCardCubit, SelectCardState>(
         builder: (context, currentColorState) => GestureDetector(
               onTap: () {
-                _selectFinanceCardBlock.add(
-                    (currentColorState == notSelectedColor)
-                        ? SelectedEvent.selected
-                        : SelectedEvent.notSelected);
+                selectCardCubit.changeSelectState();
               },
               child: Card(
-                color: currentColorState,
+                color: currentColorState.stateColor,
                 margin: const EdgeInsets.symmetric(
                     vertical: financeItemMargin,
                     horizontal: financeItemMargin * 2),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:training_project/block/user_bloc.dart';
-import 'package:training_project/block/user_events.dart';
-import 'package:training_project/block/user_state.dart';
 import 'package:training_project/constants.dart';
+import 'package:training_project/cubit/user_cubit.dart';
+import 'package:training_project/cubit/user_state.dart';
 import 'package:training_project/screens/finance_screen.dart';
 import 'package:training_project/services/users_repository.dart';
 import 'package:training_project/strings.dart';
@@ -17,8 +16,8 @@ class FeedBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<UserBloc>(
-      create: (context) => UserBloc(usersRepository),
+    return BlocProvider<UserCubit>(
+      create: (context) => UserCubit(usersRepository),
       child: Column(
         children: const [
           SizedBox(height: 16),
@@ -37,7 +36,7 @@ class UsersList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserBloc, UserState>(builder: (context, state) {
+    return BlocBuilder<UserCubit, UserState>(builder: (context, state) {
       if (state is UserEmptyState) {
         return SizedBox(
           height: MediaQuery.of(context).size.height / 3,
@@ -102,7 +101,7 @@ class UsersManagementButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UserBloc userBloc = BlocProvider.of<UserBloc>(context);
+    final UserCubit userCubit = context.watch<UserCubit>();
     return Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -111,7 +110,7 @@ class UsersManagementButtons extends StatelessWidget {
             flex: 5,
             child: ElevatedButton(
                 onPressed: () {
-                  userBloc.add(UserLoadEvent());
+                  userCubit.fetchUsers();
                 },
                 child: Text(Strings.load))),
         const SizedBox(width: 8),
@@ -119,7 +118,7 @@ class UsersManagementButtons extends StatelessWidget {
             flex: 5,
             child: ElevatedButton(
                 onPressed: () {
-                  userBloc.add(UserClearEvent());
+                  userCubit.clearUsers();
                 },
                 child: Text(Strings.clear)))
       ],

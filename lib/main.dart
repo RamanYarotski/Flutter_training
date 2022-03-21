@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:training_project/block/select_finance_card_block.dart';
+import 'package:training_project/cubit/select_card_cubit.dart';
 import 'package:training_project/screens/home_screen.dart';
 import 'package:training_project/theme.dart';
 
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SelectFinanceCardBlock(),
+      create: (context) => SelectCardCubit(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Flutter Demo",
