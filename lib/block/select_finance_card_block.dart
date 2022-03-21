@@ -5,14 +5,12 @@ import 'package:training_project/constants.dart';
 enum SelectedEvent { selected, notSelected }
 
 class SelectFinanceCardBlock extends Bloc<SelectedEvent, Color> {
-  Color _color = notSelectedColor;
 
-  @override
-  Color get initialState => _color;
+  SelectFinanceCardBlock() : super(notSelectedColor);
 
   @override
   Stream<Color> mapEventToState(SelectedEvent event) async* {
-    _color =
+   Color _color =
         (event == SelectedEvent.selected) ? selectedColor : notSelectedColor;
     yield _color;
   }

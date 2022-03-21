@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:training_project/block/user_events.dart';
 import 'package:training_project/block/user_state.dart';
@@ -7,10 +6,7 @@ import 'package:training_project/services/users_repository.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final UsersRepository usersRepository;
-  UserBloc({@required this.usersRepository}) : assert(usersRepository != null);
-
-  @override
-  UserState get initialState => UserEmptyState();
+  UserBloc(this.usersRepository) : super(UserEmptyState());
 
   @override
   Stream<UserState> mapEventToState(UserEvent event) async* {
